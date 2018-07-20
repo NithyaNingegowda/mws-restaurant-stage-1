@@ -1,7 +1,10 @@
+/* Adding service worker - Code inspired by previous projects in the starter course */
+
 const version = "0.0.1";
 const cacheName = `resturant-${version}`;
 self.addEventListener('install', e => {
   const timeStamp = Date.now();
+  console.log('Adding resource to cache');
   e.waitUntil(
     caches.open(cacheName).then(cache => {
       return cache.addAll([
@@ -33,6 +36,7 @@ self.addEventListener('activate', event => {
   event.waitUntil(self.clients.claim());
 });
 
+/* Adding network request to cache */
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.open(cacheName)
